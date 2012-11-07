@@ -1,5 +1,4 @@
 var SalveOPlaneta = cc.Layer.extend({
-	
 	 _sprite:null,
 	 _aeronave:null, 
 
@@ -11,42 +10,34 @@ var SalveOPlaneta = cc.Layer.extend({
 		this._sprite = cc.Sprite.create("./images/espaco.jpg");
 		this._sprite.setAnchorPoint(cc.p(0.5, 0.5));
 		this._sprite.setPosition(cc.p(size.width / 2, size.height / 2));
-
 		this.addChild(this._sprite, 0);
 		
-		//adicionando áudio.
+		// adicionando áudio.
 		cc.AudioEngine.getInstance().setBackgroundMusicVolume(0.5);
-
-        var menuItem2 = new cc.MenuItemFont.create("PLAY",this,this.playSong);
-        var menuItem3 = new cc.MenuItemFont.create("STOP",this,this.stopPlayingSound);
-
-        menuItem2.setPosition(new cc.Point(750,570));
-        menuItem3.setPosition(new cc.Point(750,545));
-
-        var menu = cc.Menu.create(menuItem2,menuItem3);
+        var menuItem1 = new cc.MenuItemFont.create("PLAY",this,this.playSong);
+        var menuItem2 = new cc.MenuItemFont.create("STOP",this,this.stopPlayingSound);
+        menuItem1.setPosition(new cc.Point(750,570));
+        menuItem2.setPosition(new cc.Point(750,545));
+        var menu = cc.Menu.create(menuItem1,menuItem2);
         menu.setPosition(new cc.Point(0,0));
-
         this.addChild(menu);
+		
+		// adicionando situacao do jogo.
 
 		// criando a aeronave.
         this._aeronave = new Aeronave();
         this.setKeyboardEnabled(true); //mover com o teclado.
-		
         this.setPosition(new cc.Point(0,0));
-
         this.addChild(this._aeronave);
         this._aeronave.scheduleUpdate(); // a função update da aeronave será chamada a cada frame.
         this.schedule(this.update);
 		
 		// criando os meteoritos.
-		var meteorito = new Meteorito();
-		meteorito._posicao = cc.p(size.width/2,size.height/2);
-		this.addChild(meteorito);
-		
 		_meteoritoScene = new MeteoritoScene();
 		_meteoritoScene.setConteiner(this);
+		_meteoritoScene.setAeronave(this._aeronave);
 		_meteoritoScene.init();
-
+		
         return true;
     },
 	

@@ -4,7 +4,7 @@
         COCOS2D_DEBUG:2, 
         box2d:false, // Não inicializa a física box2d.
         showFPS:true, // Habilita o contador de quadros por segundo.
-        frameRate:60,
+        frameRate:30,
         tag:'gameCanvas', // Renderiza cocos2d.
         engineDir:'cocos2d/', // Diretório de bibliotecas cocos2d.
         appFiles:['js/SalveOPlaneta.js','js/Aeronave.js','js/Poder.js','js/Meteorito.js'] // Lista todos os scripts que compõem o jogo.

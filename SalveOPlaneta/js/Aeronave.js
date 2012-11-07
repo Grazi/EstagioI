@@ -24,7 +24,7 @@ var Aeronave = cc.Sprite.extend({
     
 	validatePosition:function() {
 	    //até que posição a nave pode se mover (largura, o x).
-		if(this._currentPosition < 100) this._currentPosition = 100;
-        if(this._currentPosition > 700) this._currentPosition = 700;
+		if(this._currentPosition < 50) this._currentPosition = 50;
+        if(this._currentPosition > 750) this._currentPosition = 750;
 	},
 });
