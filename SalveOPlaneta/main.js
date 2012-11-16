@@ -11,8 +11,10 @@ var cocos2dApp = cc.Application.extend({
         cc.Loader.shareLoader().onload = function () {
             cc.AppController.shareAppController().didFinishLaunchingWithOptions();
         };
-		cc.AudioEngine.getInstance().init("mp3,ogg,wav");
+		cc.AudioEngine.getInstance().init("mp3");
         cc.Loader.shareLoader().preload([
+		    {type:"effect",src:"./Resources/effect"},
+			{type:"effect", src:"./Resources/explosion"},
 			{type:"bgm",src:"./Resources/background"}
         ]);
     },
@@ -25,4 +27,4 @@ var cocos2dApp = cc.Application.extend({
         return true;
     }
 });
-var myApp = new cocos2dApp(SalveOPlanetaScene);
+var myApp = new cocos2dApp(InicioScene);

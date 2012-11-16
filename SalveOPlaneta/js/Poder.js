@@ -6,13 +6,11 @@ var Poder = cc.Sprite.extend({
         this.schedule(function() {
 				// velocidade do poder.
                 this.setPosition(new cc.Point(this.getPosition().x, this.getPosition().y + 15));
-                this.validatePosition();
+                this.validarPosicao();
             });
-        
-        return true;
     },
     
-	validatePosition:function() {
+	validarPosicao:function() {
         if(this.getPosition().y  > 600) this.getPosition().y  = 600;
     }
 });  
