@@ -7,7 +7,7 @@
         frameRate:30,
         tag:'gameCanvas', // Renderiza cocos2d.
         engineDir:'cocos2d/', // Diretório de bibliotecas cocos2d.
-        appFiles:['js/SalveOPlaneta.js','js/Aeronave.js','js/Poder.js','js/Meteorito.js', 'js/Inicio.js', 'js/GameOver.js'] // Lista todos os scripts que compõem o jogo.
+        appFiles:['js/SalveOPlaneta.js','js/Aeronave.js','js/Poder.js','js/Meteorito.js', 'js/Inicio.js', 'js/GameOver.js', 'js/VencerGame.js'] // Lista todos os scripts que compõem o jogo.
     };
     window.addEventListener('DOMContentLoaded', function () {
         var s = d.createElement('script');

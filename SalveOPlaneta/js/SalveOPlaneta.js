@@ -28,9 +28,9 @@ var SalveOPlaneta = cc.Layer.extend({
 		// adicionando situacao do jogo.
 		var menuGame= new cc.MenuItemFont.create("JOGO");
 		menuGame.setPosition(new cc.Point(70,570));
-        var menuWin = new cc.MenuItemFont.create("Ganhos: ");
+        var menuWin = new cc.MenuItemFont.create("Acertos: ");
 		menuWin.setPosition(new cc.Point(70,535));
-		var menuOver = new cc.MenuItemFont.create("Perdas: ");
+		var menuOver = new cc.MenuItemFont.create("Erros: ");
 		menuOver.setPosition(new cc.Point(70,510));
         var menuGeral = cc.Menu.create(menuGame, menuWin, menuOver);
         menuGeral.setPosition(new cc.Point(0,0)); // para que o menu possa ser exibido.
@@ -70,6 +70,8 @@ var SalveOPlaneta = cc.Layer.extend({
 		// setas.
         this._aeronave.movimentarAeronave(e);
     },
+	onKeyUp:function(e){
+    },
 	
 	// cria o poder apos clicar na tecla Space.
 	criarPoder:function(e){
@@ -83,6 +85,7 @@ var SalveOPlaneta = cc.Layer.extend({
 });
 
 SalveOPlanetaScene = cc.Scene.extend({
+	
     onEnter:function(){
         this._super();
         var layer = new SalveOPlaneta();

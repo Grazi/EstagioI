@@ -1,7 +1,12 @@
+
+var _acertos = 0;
+var	_erros = 3;
+
 var Meteorito = cc.Sprite.extend({
     _conteiner: null,
 	_posicao: cc.p(0,0),
 	_aeronave: null,
+	
 	
     ctor:function(conteiner) {
 		this._conteiner = conteiner;
@@ -13,31 +18,53 @@ var Meteorito = cc.Sprite.extend({
 				this.process();
             });
     },
-	
-	// exibirGameOver : function(){
-	    // var label = cc.LabelTTF.create( "GAME OVER!", "Comic Sans", 100 );
-		// var menuitem = cc.MenuItemLabel.create(label);
-		// menuitem.setPosition(new cc.Point(30,50));
-		// var menu = cc.Menu.create(menuitem);
-        // this.addChild(menu);
-	// },
-	
-	 // // Pausa o jogo.
-	 // onPause : function(){
-		// cc.Director.getInstance().pause();
-		// this.exibirGameOver();
-	 // },
-		
+
 	setAeronave : function(aeronave){
 		this._aeronave = aeronave;
 	},
-	
-	process:function() {
-			if(!this.isAlive()) {
-				this._conteiner.removeChild(this); // remove o meteorito.
-			}
+
+	//Incrementa acertos.
+	acertar : function(){
+		_acertos++;
+		this.verificaSeVenceuGame();
+	},
+
+	//Decrementa erros.
+	errar : function(){
+		if(_erros > 0){
+			_erros -= 1;
+			this.verificaSePerdeuGame();
+		}
+		
 	},
 	
+	process:function() {
+		if(!this.isAlive()) {
+			this._conteiner.removeChild(this); // remove o meteorito.		
+		}
+	},
+
+	//Quando 10 meteoritos forem atingidos o jogo exibe a pagina de VencerGame.
+	verificaSeVenceuGame : function(){
+		if (_acertos == 10){
+			cc.Director.getInstance().replaceScene(cc.TransitionFade.create(0.5, new VencerGameScene())); 
+			this.stopPlayingSound();
+		}
+
+	},
+
+	//Quando a aeronave for atingida 3 vezes o jogo exibe a pagina de GameOver.
+	verificaSePerdeuGame : function(){
+		if (_erros == 0){
+			this._conteiner.removeChild(this._aeronave);
+			this.playSoundAeronave();
+			cc.Director.getInstance().replaceScene(cc.TransitionFade.create(0.5, new GameOverScene())); 
+			this.stopPlayingSound();
+		}
+
+	},
+
+
 	 // Verifica todas as possiveis colisoes!!!
 	 isAlive:function() {
 		var child = null;
@@ -55,18 +82,16 @@ var Meteorito = cc.Sprite.extend({
 			if(this.testarColisaoEntrePoderEMeteorito_X(child.getPosition(), this.getPosition()) && this.testarColisaoEntrePoderEMeteorito_Y(child.getPosition(), this.getPosition())) {
 				this.playSoundPoder();
 				this._conteiner.removeChild(child); // remove o poder.
+				this.acertar();
 			    return false; 
 			}
 		  }
 		  
 		  //Verifica se a aeronave foi atingida pelo meteorito.
 		  if(this.testarColisaoEntreAeronaveEMeteorito_X(aeronave.getPosition(), this.getPosition()) && this.testarColisaoEntreAeronaveEMeteorito_Y(aeronave.getPosition(), this.getPosition())) {
-			  this._conteiner.removeChild(aeronave); // remove a aeronave. 
-			  this.playSoundAeronave();
-			  cc.Director.getInstance().replaceScene(cc.TransitionFade.create(0.5, new GameOverScene())); 
+			  this.errar();
 			  return false; 
 			}
-			
 		}
 		return true;
     },
@@ -103,13 +128,29 @@ var Meteorito = cc.Sprite.extend({
 		return false;
 	},
 	
+	//Toca o som do Poder ao colidir.
 	playSoundPoder:function(){
 	    cc.AudioEngine.getInstance().playEffect("./Resources/effect");
      },
 	 
+	//Toca o som da Explosao da Aeronave.
 	playSoundAeronave:function(){
 	    cc.AudioEngine.getInstance().playEffect("./Resources/explosion");
-	}
+	},
+	
+	//Pausa a música.
+    stopPlayingSound:function(){
+                if(cc.AudioEngine.getInstance().isBackgroundMusicPlaying())
+        {
+	        cc.AudioEngine.getInstance().stopBackgroundMusic();
+        }
+    }
+
+    // // Pausa o jogo.
+	 // onPause : function(){
+		// cc.Director.getInstance().pause();
+		// this.exibirGameOver();
+	 // },
 	
 });
 
