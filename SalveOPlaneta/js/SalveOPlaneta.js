@@ -1,6 +1,8 @@
 var SalveOPlaneta = cc.Layer.extend({
 	 _sprite: null,
 	 _aeronave: null, 
+	 _meteoritoScene: null,
+	 _menuWin:null, 
 
 	 init:function(){
         this._super();
@@ -28,11 +30,11 @@ var SalveOPlaneta = cc.Layer.extend({
 		// adicionando situacao do jogo.
 		var menuGame= new cc.MenuItemFont.create("JOGO");
 		menuGame.setPosition(new cc.Point(70,570));
-        var menuWin = new cc.MenuItemFont.create("Acertos: ");
-		menuWin.setPosition(new cc.Point(70,535));
+        this._menuWin = new cc.MenuItemFont.create("Acertos: " + getPontos());
+		this._menuWin.setPosition(new cc.Point(70,535));
 		var menuOver = new cc.MenuItemFont.create("Erros: ");
 		menuOver.setPosition(new cc.Point(70,510));
-        var menuGeral = cc.Menu.create(menuGame, menuWin, menuOver);
+        var menuGeral = cc.Menu.create(menuGame, this._menuWin, menuOver);
         menuGeral.setPosition(new cc.Point(0,0)); // para que o menu possa ser exibido.
         this.addChild(menuGeral);
 		
@@ -47,6 +49,10 @@ var SalveOPlaneta = cc.Layer.extend({
 		_meteoritoScene.setConteiner(this);
 		_meteoritoScene.setAeronave(this._aeronave);
 		_meteoritoScene.init();
+
+		this.schedule(function() {
+		   this._menuWin.setLabel("Acertos: " + getPontos());
+            });
 
     },
 	

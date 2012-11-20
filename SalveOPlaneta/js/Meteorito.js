@@ -2,6 +2,10 @@
 var _acertos = 0;
 var	_erros = 3;
 
+function getPontos(){
+	return _acertos;
+}
+
 var Meteorito = cc.Sprite.extend({
     _conteiner: null,
 	_posicao: cc.p(0,0),
@@ -26,6 +30,14 @@ var Meteorito = cc.Sprite.extend({
 	reset : function(){
 		_acertos = 0;
 		_erros = 3;
+	},
+
+	getAcertos : function(){
+		return _acertos;
+	},
+
+	getErros : function(){
+		return _erros;
 	},
 
 	//Incrementa acertos.
