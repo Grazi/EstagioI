@@ -23,6 +23,11 @@ var Meteorito = cc.Sprite.extend({
 		this._aeronave = aeronave;
 	},
 
+	reset : function(){
+		_acertos = 0;
+		_erros = 3;
+	},
+
 	//Incrementa acertos.
 	acertar : function(){
 		_acertos++;
@@ -47,8 +52,9 @@ var Meteorito = cc.Sprite.extend({
 	//Quando 10 meteoritos forem atingidos o jogo exibe a pagina de VencerGame.
 	verificaSeVenceuGame : function(){
 		if (_acertos == 10){
-			cc.Director.getInstance().replaceScene(cc.TransitionFade.create(0.5, new VencerGameScene())); 
+			cc.Director.getInstance().replaceScene(cc.TransitionFade.create(0.5, new VencerGameScene()));
 			this.stopPlayingSound();
+			this.reset();
 		}
 
 	},
@@ -60,6 +66,7 @@ var Meteorito = cc.Sprite.extend({
 			this.playSoundAeronave();
 			cc.Director.getInstance().replaceScene(cc.TransitionFade.create(0.5, new GameOverScene())); 
 			this.stopPlayingSound();
+			this.reset();
 		}
 
 	},
