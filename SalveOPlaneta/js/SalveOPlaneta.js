@@ -51,7 +51,8 @@ var SalveOPlaneta = cc.Layer.extend({
 		_meteoritoScene.init();
 
 		this.schedule(function() {
-		   this._menuWin.setLabel("Acertos: " + getPontos());
+		   this._menuWin.setString("Acertos: " + getPontos());
+		   //this._menuWin.setString("Acertos: teste") ;
             });
 
     },
