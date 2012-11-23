@@ -3,10 +3,12 @@ var SalveOPlaneta = cc.Layer.extend({
 	 _aeronave: null, 
 	 _meteoritoScene: null,
 	 _menuWin:null, 
+	 _menuOver:null,
 
 	 init:function(){
         this._super();
 		this.playSong();
+		this.reset();
 		var size = cc.Director.getInstance().getWinSize();
 		
 		// adicionando plano de fundo.
@@ -30,11 +32,11 @@ var SalveOPlaneta = cc.Layer.extend({
 		// adicionando situacao do jogo.
 		var menuGame= new cc.MenuItemFont.create("JOGO");
 		menuGame.setPosition(new cc.Point(70,570));
-        this._menuWin = new cc.MenuItemFont.create("Acertos: " + getPontos());
+        this._menuWin = new cc.MenuItemFont.create();
 		this._menuWin.setPosition(new cc.Point(70,535));
-		var menuOver = new cc.MenuItemFont.create("Erros: ");
-		menuOver.setPosition(new cc.Point(70,510));
-        var menuGeral = cc.Menu.create(menuGame, this._menuWin, menuOver);
+		this._menuOver = new cc.MenuItemFont.create();
+		this._menuOver.setPosition(new cc.Point(70,510));
+        var menuGeral = cc.Menu.create(menuGame, this._menuWin, this._menuOver);
         menuGeral.setPosition(new cc.Point(0,0)); // para que o menu possa ser exibido.
         this.addChild(menuGeral);
 		
@@ -52,11 +54,16 @@ var SalveOPlaneta = cc.Layer.extend({
 
 		this.schedule(function() {
 		   this._menuWin.setString("Acertos: " + getPontos());
-		   //this._menuWin.setString("Acertos: teste") ;
+		   this._menuOver.setString("Chances: " + getChances());
             });
 
     },
 	
+	reset : function(){
+		_acertos = 0;
+		_erros = 3;
+	},
+
 	//toca a música.
 	playSong:function(){
          cc.AudioEngine.getInstance().playBackgroundMusic("./Resources/background",true); // true para ficar repetindo a musica.

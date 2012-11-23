@@ -4,7 +4,11 @@ var	_erros = 3;
 
 function getPontos(){
 	return _acertos;
-}
+};
+
+function getChances(){
+	return _erros;
+};
 
 var Meteorito = cc.Sprite.extend({
     _conteiner: null,
@@ -25,11 +29,6 @@ var Meteorito = cc.Sprite.extend({
 
 	setAeronave : function(aeronave){
 		this._aeronave = aeronave;
-	},
-
-	reset : function(){
-		_acertos = 0;
-		_erros = 3;
 	},
 
 	getAcertos : function(){
@@ -66,7 +65,6 @@ var Meteorito = cc.Sprite.extend({
 		if (_acertos == 10){
 			cc.Director.getInstance().replaceScene(cc.TransitionFade.create(0.5, new VencerGameScene()));
 			this.stopPlayingSound();
-			this.reset();
 		}
 
 	},
@@ -78,7 +76,6 @@ var Meteorito = cc.Sprite.extend({
 			this.playSoundAeronave();
 			cc.Director.getInstance().replaceScene(cc.TransitionFade.create(0.5, new GameOverScene())); 
 			this.stopPlayingSound();
-			this.reset();
 		}
 
 	},
