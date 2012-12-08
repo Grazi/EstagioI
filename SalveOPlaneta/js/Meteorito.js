@@ -63,6 +63,7 @@ var Meteorito = cc.Sprite.extend({
 	//Quando 10 meteoritos forem atingidos o jogo exibe a pagina de VencerGame.
 	verificaSeVenceuGame : function(){
 		if (_acertos == 10){
+			this.playSoundWin();
 			cc.Director.getInstance().replaceScene(cc.TransitionFade.create(0.5, new VencerGameScene()));
 			this.stopPlayingSound();
 		}
@@ -147,6 +148,11 @@ var Meteorito = cc.Sprite.extend({
 	//Toca o som do Poder ao colidir.
 	playSoundPoder:function(){
 	    cc.AudioEngine.getInstance().playEffect("./Resources/effect");
+     },
+
+    //Toca o som da Vitoria.
+	playSoundWin:function(){
+	    cc.AudioEngine.getInstance().playEffect("./Resources/win");
      },
 	 
 	//Toca o som da Explosao da Aeronave.

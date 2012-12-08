@@ -15,13 +15,17 @@ var cocos2dApp = cc.Application.extend({
         cc.Loader.shareLoader().preload([
 		    {type:"effect",src:"./Resources/effect"},
 			{type:"effect", src:"./Resources/explosion"},
-			{type:"bgm",src:"./Resources/background"}
+			{type:"effect",src:"./Resources/fire"},
+            {type:"effect",src:"./Resources/win"},
+            {type:"bgm",src:"./Resources/background"},
+            {type:"image", src:"./images/botao_jogar.jpg"},
+            {type:"image", src:"./images/botao_instrucoes.jpg"}
         ]);
     },
     applicationDidFinishLaunching:function () {
         var director = cc.Director.getInstance();
-        director.setDisplayStats(this.config['showFPS']);
-        director.setAnimationInterval(1.0 / this.config['frameRate']);
+       /* director.setDisplayStats(this.config['showFPS']);
+        director.setAnimationInterval(1.0 / this.config['frameRate']);*/
         director.runWithScene(new this.startScene());
 
         return true;

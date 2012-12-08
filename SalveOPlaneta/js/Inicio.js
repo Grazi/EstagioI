@@ -1,30 +1,34 @@
 var Inicio = cc.Layer.extend({   
     ctor:function(){
 
-	this.setTouchEnabled(true)
+	    this.setTouchEnabled(true);
 		
-		var label1 = cc.LabelTTF.create( "Terriveis chuvas de meteoritos podem atingir a Terra e so voce pode impedir esse desastre." , "Comic Sans", 20 ); 
-		var menuItem1 = cc.MenuItemLabel.create(label1);
-		menuItem1.setPosition(new cc.Point(5,100));
-		
-		var label2 = cc.LabelTTF.create( "Destrua os meteoritos e" , "Comic Sans", 20 ); 
-		var menuItem2 = cc.MenuItemLabel.create(label2);
-		menuItem2.setPosition(new cc.Point(30,70));
-		
-	    var label3 = cc.LabelTTF.create( "Salve o Planeta!", "Comic Sans", 60 );
-		var menuItem3 = cc.MenuItemLabel.create(label3);
-		menuItem3.setPosition(new cc.Point(30,30));
-	
-    	var label4 = cc.LabelTTF.create( "Iniciar Jogo", "Comic Sans", 30 );
-        var menuItem4 = cc.MenuItemLabel.create(label4, this, function(){
-                cc.Director.getInstance().replaceScene(cc.TransitionFade.create(0.5, new SalveOPlanetaScene())); 
-		});
-		menuItem4.setPosition(new cc.Point(10, - 30));
-	
-        var menu = cc.Menu.create(menuItem1, menuItem2, menuItem3, menuItem4);
+	    var size = cc.Director.getInstance().getWinSize();
+		var sprite = cc.Sprite.create("./images/telainicial.jpg");
+		sprite.setPosition(cc.p(size.width / 2, size.height / 2)); // posiciona o centro da imagem no centro da tela.
+		this.addChild(sprite);
 
-        this.addChild(menu);
+		// Botao Jogar
+        var itemJogar = cc.MenuItemImage.create("./images/botao_jogar.jpg", "./images/botao_jogar.jpg", this, this.iniciarJogo);
+        var menuJogar = cc.Menu.create(itemJogar);
+        menuJogar.setPosition( cc.p( 535, 185 ) ); 
+        this.addChild(menuJogar);
+
+		// Botao Instrucoes
+        var instrucoes = cc.MenuItemImage.create("./images/botao_instrucoes.jpg", "./images/botao_instrucoes.jpg", this, this.visualizarInstrucoes);
+        var menuInstrucoes = cc.Menu.create(instrucoes);
+        menuInstrucoes.setPosition( cc.p( 504, 140 ) );  
+        this.addChild(menuInstrucoes);
+    },
+
+    iniciarJogo:function() {
+         cc.Director.getInstance().replaceScene(cc.TransitionFade.create(0.5, new SalveOPlanetaScene()));  
+    },
+
+    visualizarInstrucoes:function() {
+        cc.Director.getInstance().replaceScene(cc.TransitionFade.create(0.5, new InstrucoesScene()));  
     }
+
 });
 
 InicioScene = cc.Scene.extend({
@@ -34,5 +38,5 @@ InicioScene = cc.Scene.extend({
 		layer.init();
 		this.addChild(layer);
 	}
-})
+});
 

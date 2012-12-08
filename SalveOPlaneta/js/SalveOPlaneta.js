@@ -31,11 +31,11 @@ var SalveOPlaneta = cc.Layer.extend({
 		
 		// adicionando situacao do jogo.
 		var menuGame= new cc.MenuItemFont.create("JOGO");
-		menuGame.setPosition(new cc.Point(70,570));
+		menuGame.setPosition(new cc.Point(90,570));
         this._menuWin = new cc.MenuItemFont.create();
-		this._menuWin.setPosition(new cc.Point(70,535));
+		this._menuWin.setPosition(new cc.Point(90,535));
 		this._menuOver = new cc.MenuItemFont.create();
-		this._menuOver.setPosition(new cc.Point(70,510));
+		this._menuOver.setPosition(new cc.Point(90,510));
         var menuGeral = cc.Menu.create(menuGame, this._menuWin, this._menuOver);
         menuGeral.setPosition(new cc.Point(0,0)); // para que o menu possa ser exibido.
         this.addChild(menuGeral);
@@ -64,6 +64,11 @@ var SalveOPlaneta = cc.Layer.extend({
 		_erros = 3;
 	},
 
+	//Toca o som do Tiro.
+	playSoundFire:function(){
+	    cc.AudioEngine.getInstance().playEffect("./Resources/fire");
+	},
+
 	//toca a música.
 	playSong:function(){
          cc.AudioEngine.getInstance().playBackgroundMusic("./Resources/background",true); // true para ficar repetindo a musica.
@@ -90,6 +95,7 @@ var SalveOPlaneta = cc.Layer.extend({
 	// cria o poder apos clicar na tecla Space.
 	criarPoder:function(e){
           if(e === cc.KEY.space) {
+          	this.playSoundFire();
             var poder = new Poder();
 			poder.setPosition(new cc.Point(this._aeronave.getPosition().x, this._aeronave.getPosition().y + 70));
             this.addChild(poder);

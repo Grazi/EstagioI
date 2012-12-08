@@ -14,11 +14,11 @@ var Aeronave = cc.Sprite.extend({
     movimentarAeronave:function(e) {
 	    //a cada clique de seta para direita, posição incrementa 10 (largura).
         if(e === cc.KEY.right) {
-            this._posicaoAtual = this._posicaoAtual + 10;
+            this._posicaoAtual = this._posicaoAtual + 20;
         }
 		//a cada clique de seta para esquerda, posição decrementa 10 (largura).
         else if(e === cc.KEY.left) {
-            this._posicaoAtual = this._posicaoAtual - 10;
+            this._posicaoAtual = this._posicaoAtual - 20;
 		}
 		this.validarPosicao();
     },
